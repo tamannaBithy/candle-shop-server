@@ -33,7 +33,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        const database = client.db("");
+        const database = client.db("candleDb");
         const servicesCollection = database.collection("services");
         const addedCollection = database.collection("allService");
         const ordersCollection = database.collection("orders");
