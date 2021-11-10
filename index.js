@@ -34,19 +34,18 @@ async function run() {
     try {
         await client.connect();
         const database = client.db("candleDb");
-        const servicesCollection = database.collection("services");
-        const addedCollection = database.collection("allService");
+        const productsCollection = database.collection("allProducts");
         const ordersCollection = database.collection("orders");
 
         // console.log("mongo connect succesfully");
 
 
-        // // GET API
-        // app.get('/services', async (req, res) => {
-        //     const cursor = servicesCollection.find({});
-        //     const services = await cursor.toArray();
-        //     res.send(services)
-        // })
+        // GET API
+        app.get('/products', async (req, res) => {
+            const cursor = productsCollection.find({});
+            const services = await cursor.toArray();
+            res.send(services)
+        })
 
 
         // // GET INSERTED DATA
@@ -57,13 +56,13 @@ async function run() {
         // })
 
 
-        // // GET SINGLE SERVICE
-        // app.get('/services/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const service = await servicesCollection.findOne(query);
-        //     res.send(service)
-        // })
+        // GET SINGLE SERVICE
+        app.get('/products/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const service = await productsCollection.findOne(query);
+            res.send(service)
+        })
 
 
 
@@ -78,24 +77,22 @@ async function run() {
 
 
 
-        // //add order in database
-        // app.post("/manageOrders", async (req, res) => {
-        //     const orderDetails = req.body;
-        //     const result = await ordersCollection.insertOne(orderDetails);
-        //     res.json(result);
-        // });
+        //add order in database
+        app.post("/manageOrders", async (req, res) => {
+            const orderDetails = req.body;
+            const result = await ordersCollection.insertOne(orderDetails);
+            res.json(result);
+        });
 
 
 
-        // // get all order by email query only for me
-        // app.get("/myOrders/:email", (req, res) => {
-        //     console.log(req.params);
-        //     ordersCollection
-        //         .find({ email: req.params.email })
-        //         .toArray((err, results) => {
-        //             res.send(results);
-        //         });
-        // });
+        // get all order by email query only for me
+        app.get("/myOrder/:email", async (req, res) => {
+            const result = await ordersCollection
+                .find({ email: req.params.email })
+                .toArray();
+            res.send(result);
+        });
 
 
 
@@ -108,13 +105,13 @@ async function run() {
 
 
 
-        // // DELETE API
-        // app.delete('/deleteProduct/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const result = await ordersCollection.deleteOne(query);
-        //     res.json(result);
-        // })
+        // DELETE API
+        app.delete('/deleteProduct/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await ordersCollection.deleteOne(query);
+            res.json(result);
+        })
 
 
 
