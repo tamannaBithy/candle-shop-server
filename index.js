@@ -49,6 +49,15 @@ async function run() {
         })
 
 
+        //add product in database
+        app.post("/products", async (req, res) => {
+            const productDetails = req.body;
+            const result = await productsCollection.insertOne(productDetails);
+            res.json(result);
+        });
+
+
+
         // GET SINGLE SERVICE
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
@@ -109,6 +118,8 @@ async function run() {
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
+
+
 
 
 
