@@ -36,6 +36,7 @@ async function run() {
         const database = client.db("candleDb");
         const productsCollection = database.collection("allProducts");
         const ordersCollection = database.collection("orders");
+        const reviewCollection = database.collection("reviews");
 
         // console.log("mongo connect succesfully");
 
@@ -48,14 +49,6 @@ async function run() {
         })
 
 
-        // // GET INSERTED DATA
-        // app.get('/addService', async (req, res) => {
-        //     const cursor = addedCollection.find({});
-        //     const services = await cursor.toArray();
-        //     res.send(services)
-        // })
-
-
         // GET SINGLE SERVICE
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
@@ -63,17 +56,6 @@ async function run() {
             const service = await productsCollection.findOne(query);
             res.send(service)
         })
-
-
-
-
-        // //  POST / INSERT API
-        // app.post('/addService', async (req, res) => {
-        //     const packageDetails = req.body;
-        //     const result = await addedCollection.insertOne(packageDetails);
-        //     res.json(result);
-
-        // })
 
 
 
@@ -112,6 +94,13 @@ async function run() {
             const result = await ordersCollection.deleteOne(query);
             res.json(result);
         })
+
+
+        // review
+        app.post("/review", async (req, res) => {
+            const result = await reviewCollection.insertOne(req.body);
+            res.send(result);
+        });
 
 
 
