@@ -78,12 +78,12 @@ async function run() {
 
 
 
-        // // get all orders for all public
-        // app.get('/manageOrders', async (req, res) => {
-        //     const cursor = ordersCollection.find({});
-        //     const orders = await cursor.toArray();
-        //     res.send(orders);
-        // })
+        // get all orders for all public
+        app.get('/manageOrders', async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const orders = await cursor.toArray();
+            res.send(orders);
+        })
 
 
 
