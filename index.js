@@ -103,6 +103,14 @@ async function run() {
         });
 
 
+        // GET reviews
+        app.get('/review', async (req, res) => {
+            const cursor = reviewCollection.find({});
+            const reviews = await cursor.toArray();
+            res.send(reviews)
+        })
+
+
 
         // // UPDATE API
         // app.put("/manageOrders/:id", async (req, res) => {
