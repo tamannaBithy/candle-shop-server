@@ -37,7 +37,7 @@ async function run() {
         const productsCollection = database.collection("allProducts");
         const ordersCollection = database.collection("orders");
         const reviewCollection = database.collection("reviews");
-        const usersCollection = database.collection("admin");
+        const usersCollection = database.collection("users");
 
         // console.log("mongo connect succesfully");
 
@@ -186,17 +186,17 @@ async function run() {
 
 
 
-        // //  make admin
-        // app.put("/makeAdmin", async (req, res) => {
-        //     const filter = { email: req.body.email };
-        //     const result = await usersCollection.find(filter).toArray();
-        //     if (result) {
-        //         const documents = await usersCollection.updateOne(filter, {
-        //             $set: { role: "admin" },
-        //         });
-        //         console.log(documents);
-        //     }
-        // });
+        //  make admin
+        app.put("/makeAdmin", async (req, res) => {
+            const filter = { email: req.body.email };
+            const result = await usersCollection.find(filter).toArray();
+            if (result) {
+                const documents = await usersCollection.updateOne(filter, {
+                    $set: { role: "admin" },
+                });
+                console.log(documents);
+            }
+        });
 
     } finally {
         //   await client.close();
