@@ -37,7 +37,7 @@ async function run() {
         const productsCollection = database.collection("allProducts");
         const ordersCollection = database.collection("orders");
         const reviewCollection = database.collection("reviews");
-        const usersCollection = database.collection("users");
+        const usersCollection = database.collection("admin");
 
         // console.log("mongo connect succesfully");
 
@@ -194,6 +194,7 @@ async function run() {
                 const documents = await usersCollection.updateOne(filter, {
                     $set: { role: "admin" },
                 });
+                res.send(result);
                 console.log(documents);
             }
         });
