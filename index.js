@@ -131,24 +131,6 @@ async function run() {
 
 
 
-
-
-        // // UPDATE API
-        // app.put("/manageOrders/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const filter = { _id: ObjectId(id) };
-
-        //     ordersCollection
-        //         .updateOne(filter, {
-        //             $set: {
-        //                 status: "Approved",
-        //             },
-        //         })
-        //         .then((result) => {
-        //             res.send(result);
-        //         });
-        // });
-
         // status update
         app.put("/manageOrders/:id", async (req, res) => {
             const filter = { _id: ObjectId(req.params.id) };
@@ -159,7 +141,6 @@ async function run() {
                 },
             });
             res.send(result);
-            console.log(result);
         });
 
 
@@ -195,7 +176,6 @@ async function run() {
                     $set: { role: "admin" },
                 });
                 res.send(result);
-                console.log(documents);
             }
         });
 
