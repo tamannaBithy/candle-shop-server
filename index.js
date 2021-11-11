@@ -199,6 +199,18 @@ async function run() {
             }
         });
 
+
+
+        // check admin or not
+        app.get("/checkAdmin/:email", async (req, res) => {
+            const result = await usersCollection
+                .find({ email: req.params.email })
+                .toArray();
+            console.log(result);
+            res.send(result);
+        });
+
+
     } finally {
         //   await client.close();
     }
