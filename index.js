@@ -115,7 +115,7 @@ async function run() {
 
         // GET reviews
         app.get('/review', async (req, res) => {
-            const cursor = reviewCollection.find({});
+            const cursor = reviewCollection.find({}).sort({ _id: -1 }).limit(4);
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
